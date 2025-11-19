@@ -484,10 +484,17 @@ def jobids():
 # -------------------------
 @app.route("/jobs", methods=["GET"])
 def jobs():
-    """
-    Endpoint solicitado: retorna os job ids coletados pela rotina de JobIDs.
-    (substitui o comportamento que retornava o histórico de secrets)
-    """
+    global LAST_JOBIDS
+
+    # Se nada foi coletado ainda, tenta ler o pool.json
+    if not LAST_JOBIDS and os.path.exists(POOL_FILE):
+        try:
+            with open(POOL_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                LAST_JOBIDS = data.get("servers", [])
+        except:
+            pass
+
     return jsonify({
         "count": len(LAST_JOBIDS),
         "servers": LAST_JOBIDS
