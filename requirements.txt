@@ -1,8 +1,2 @@
-os
-requests
-threading
-time
-logging
-random
-urllib.parse
 flask
+requests
