@@ -11,11 +11,5 @@
       "src": "api/index.py",
       "use": "@vercel/python"
     }
-  ],
-  "functions": {
-    "api/index.py": {
-      "maxDuration": 60,
-      "memory": 1024
-    }
-  }
+  ]
 }
